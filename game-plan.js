@@ -3,9 +3,10 @@ class GameBoard extends HTMLElement{
         super();
         this.attachShadow({mode: 'open'});
         this.shadowRoot.appendChild(this.#template());
+        this.cardList = document.querySelector('.memory-board');
 
         // Cards data (You can expand this list)
-    this.cards = [
+        this.cards = [
         { name: "card1", id: 1 },
         { name: "card2", id: 2 },
         { name: "card3", id: 3 },
@@ -19,8 +20,6 @@ class GameBoard extends HTMLElement{
       // Shuffle the cards before rendering
       this.shuffle(this.cards);
   
-      // Append the template to the shadow DOM
-      this.shadowRoot.appendChild(this.#template());
     }
 
     shuffle(array) {
@@ -37,6 +36,24 @@ class GameBoard extends HTMLElement{
           [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
         }
+    }
+
+    displayCards(cards) {
+        // Loop through the cards and create an HTML element for each one
+        cards.forEach(card => {
+          const cardElement = document.createElement('div');
+          cardElement.classList.add('card');
+  
+          // Create an img element for each card
+          const imgElement = document.createElement('img');
+          imgElement.src = card.path; // Set the image source
+  
+          // Append the img to the card div
+          cardElement.appendChild(imgElement);
+          
+          // Append the card element to the container
+          this.cardList.appendChild(cardElement);
+        });
       }
 
     #template() {
@@ -52,7 +69,7 @@ class GameBoard extends HTMLElement{
         
         .memory-board {
           display: grid;
-          grid-template-columns: repeat(4, 150px);
+          grid-template-columns: repeat(6, 150px);
           grid-template-rows: repeat(4, 152px);
           grid-gap: 15px;
           justify-content: center;
@@ -101,7 +118,7 @@ class GameBoard extends HTMLElement{
       </style>
 
       <div class="memory-board">
-   
+        
       </div>
         `;
         return template.content.cloneNode(true);
