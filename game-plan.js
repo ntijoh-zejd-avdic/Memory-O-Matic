@@ -1,13 +1,13 @@
-class GameBoard extends HTMLElement{
+class GameBoard extends HTMLElement {
     constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-        this.shadowRoot.appendChild(this.#template());
-        this.cardList = document.querySelector('.memory-board');
-
-        // Cards data (You can expand this list)
-
-        this.cards = [
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.appendChild(this.#template());
+      
+      this.cardList = this.shadowRoot.querySelector('.memory-board');
+  
+      // Cards data (You can expand this list)
+      this.cards = [
         { path: "./img/1_pig.png", id: 1 },
         { path: "./img/2_squirrel.png", id: 2 },
         { path: "./img/3_rabbit.png", id: 3 },
@@ -25,109 +25,86 @@ class GameBoard extends HTMLElement{
       // Shuffle the cards before rendering
       this.shuffle(this.cards);
   
+      // Display the shuffled cards
+      this.displayCards(this.cards);
     }
-
+  
     shuffle(array) {
-        let currentIndex = array.length;
-      
-        // While there remain elements to shuffle...
-        while (currentIndex != 0) {
-      
-          // Pick a remaining element...
-          let randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
+      let currentIndex = array.length;
+  
+      while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]
+        ];
+      }
     }
-
+  
     displayCards(cards) {
-        // Loop through the cards and create an HTML element for each one
-        cards.forEach(card => {
-          const cardElement = document.createElement('div');
-          cardElement.classList.add('card');
+      // Loop through the cards and create an HTML element for each one
+      cards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
   
-          // Create an img element for each card
-          const imgElement = document.createElement('img');
-          imgElement.src = card.path; // Set the image source
+        // Create an img element for each card
+        const imgElement = document.createElement('img');
+        imgElement.src = card.path; // Set the image source
   
-          // Append the img to the card div
-          cardElement.appendChild(imgElement);
-          
-          // Append the card element to the container
-          this.cardList.appendChild(cardElement);
-        });
-      }
-
+        // Append the img to the card div
+        cardElement.appendChild(imgElement);
+        
+        // Append the card element to the container
+        this.cardList.appendChild(cardElement);
+      });
+    }
+  
     #template() {
-        const template = document.createElement('template')
-        template.innerHTML =
-        `
-       <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        
-        .memory-board {
-          display: grid;
-          grid-template-columns: repeat(6, 150px);
-          grid-template-rows: repeat(4, 152px);
-          grid-gap: 15px;
-          justify-content: center;
-          align-items: center;
-          margin: 50px auto;
-        }
-        
-        .card {
-          width: 100px;
-          height: 100px;
-          position: relative;
-          transform: scale(1);
-          transform-style: preserve-3d;
-          transition: transform 0.5s;
-        }
-        
-        .card:hover {
-          transform: scale(1.05);
-        }
-        
-        .card-front, .card-back {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 10px;
-          backface-visibility: hidden;
-        }
-        
-        .card-front {
-          background-color: #1abc9c;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 24px;
-          color: white;
-        }
-        
-        .card-back {
-          background-color: #3498db;
-          transform: rotateY(180deg);
-        }
-        
-        .card.flipped {
-          transform: rotateY(180deg);
-        }
-      </style>
-
-      <div class="memory-board">
-
-      </div>
-        `;
-        return template.content.cloneNode(true);
-      }
-}
-
-window.customElements.define('game-board', GameBoard);
+      const template = document.createElement('template');
+      template.innerHTML = `
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+  
+          .memory-board {
+            display: grid;
+            grid-template-columns: repeat(6, 150px);
+            grid-template-rows: repeat(4, 152px);
+            grid-gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+            background-color: #FDD017;
+          }
+  
+          .card {
+            width: 100%;
+            height: auto;
+            position: relative;
+            transform: scale(1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+          }
+  
+          .card:hover {
+            transform: scale(1.05);
+          }
+          
+          .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        </style>
+  
+        <div class="memory-board"></div>
+      `;
+      return template.content.cloneNode(true);
+    }
+  }
+  
+  window.customElements.define('game-board', GameBoard);
+  
