@@ -31,8 +31,9 @@ class GameBoard extends HTMLElement {
       // Display the shuffled cards
       this.displayCards(this.cards);
     }
-    
+
     shuffle(array) {
+
       let currentIndex = array.length;
       while (currentIndex != 0) {
         let randomIndex = Math.floor(Math.random() * currentIndex);
@@ -113,7 +114,7 @@ class GameBoard extends HTMLElement {
         this.lockBoard = false; // Unlock the board
       }, 1000); // Wait 1 second before flipping back
     }
-  
+
     #template() {
       const template = document.createElement('template');
       template.innerHTML = `
