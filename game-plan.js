@@ -145,7 +145,6 @@ class GameBoard extends HTMLElement {
             justify-content: center;
             align-items: center;
             margin: 50px auto;
-            background-color: #FDD017;
           }
   
           .card {
