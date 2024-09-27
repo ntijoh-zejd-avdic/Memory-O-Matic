@@ -16,10 +16,22 @@ class GameBoard extends HTMLElement {
         { path: "./img/6_bear.png", id: 6 },
         { path: "./img/7_monkey.png", id: 7 },
         { path: "./img/8_panda.png", id: 8 },
-        { path: "./img/1_pig.png", id: 1 }, // Duplicate cards for matching
+        { path: "./img/9_chick.png", id: 9 },
+        { path: "./img/10_tiger.png", id: 10 },
+        { path: "./img/11_penguin.png", id: 11 },
+        { path: "./img/12_racoon.png", id: 12 },
+        { path: "./img/1_pig.png", id: 1 },
         { path: "./img/2_squirrel.png", id: 2 },
         { path: "./img/3_rabbit.png", id: 3 },
-        { path: "./img/4_frog.png", id: 4 }
+        { path: "./img/4_frog.png", id: 4 },
+        { path: "./img/5_fox.png", id: 5 },
+        { path: "./img/6_bear.png", id: 6 },
+        { path: "./img/7_monkey.png", id: 7 },
+        { path: "./img/8_panda.png", id: 8 },
+        { path: "./img/9_chick.png", id: 9 },
+        { path: "./img/10_tiger.png", id: 10 },
+        { path: "./img/11_penguin.png", id: 11 },
+        { path: "./img/12_racoon.png", id: 12 },
       ];
   
       this.flippedCards = [];  
