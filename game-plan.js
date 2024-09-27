@@ -167,4 +167,3 @@ class GameBoard extends HTMLElement {
   }
   
   window.customElements.define('game-board', GameBoard);
-  
