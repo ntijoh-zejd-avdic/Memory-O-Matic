@@ -118,7 +118,7 @@ class GameBoard extends HTMLElement{
       </style>
 
       <div class="memory-board">
-        
+      
       </div>
         `;
         return template.content.cloneNode(true);
