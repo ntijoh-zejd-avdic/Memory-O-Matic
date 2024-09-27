@@ -49,7 +49,8 @@ class GameBoard extends HTMLElement {
   
         // Create an img element for each card
         const imgElement = document.createElement('img');
-        imgElement.src = card.path; // Set the image source
+        imgElement.id = card.path;
+        imgElement.src = './img/back.png'; // Set the image source
   
         // Append the img to the card div
         cardElement.appendChild(imgElement);
