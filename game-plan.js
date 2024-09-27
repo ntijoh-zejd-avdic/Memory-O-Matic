@@ -5,6 +5,7 @@ class GameBoard extends HTMLElement {
       this.shadowRoot.appendChild(this.#template());
       
       this.cardList = this.shadowRoot.querySelector('.memory-board');
+    //   this.card = this.shadowRoot.querySelectorAll('.card')
   
       // Cards data (You can expand this list)
       this.cards = [
@@ -28,8 +29,19 @@ class GameBoard extends HTMLElement {
       // Display the shuffled cards
       this.displayCards(this.cards);
     }
+
+    connectedCallback() {
+        // You don't need to add an event listener here since you're doing it in displayCards.
+    }
+
+    Flip_card(){
+
+        alert("Är du säker?")
+    }
+
   
     shuffle(array) {
+
       let currentIndex = array.length;
   
       while (currentIndex != 0) {
@@ -42,24 +54,29 @@ class GameBoard extends HTMLElement {
     }
   
     displayCards(cards) {
-      // Loop through the cards and create an HTML element for each one
-      cards.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-  
-        // Create an img element for each card
-        const imgElement = document.createElement('img');
-        imgElement.id = card.path;
-        imgElement.src = './img/back.png'; // Set the image source
-  
-        // Append the img to the card div
-        cardElement.appendChild(imgElement);
-        
-        // Append the card element to the container
-        this.cardList.appendChild(cardElement);
-      });
+        // Loop through the cards and create an HTML element for each one
+        cards.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('card');
+
+            // Create an img element for each card
+            const imgElement = document.createElement('img');
+            imgElement.id = card.path;
+            imgElement.src = './img/back.png'; // Set the image source
+
+            // Append the img to the card div
+            cardElement.appendChild(imgElement);
+
+            // Add a click event listener for each card
+            cardElement.addEventListener('click', this.Flip_card);
+
+            // Append the card element to the container
+            this.cardList.appendChild(cardElement);
+        });
     }
   
+
+
     #template() {
       const template = document.createElement('template');
       template.innerHTML = `
